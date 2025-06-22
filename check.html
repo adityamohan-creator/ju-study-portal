@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JECRC Feedback Form</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          animation: {
+            pulseSlow: 'pulse 3s linear infinite',
+            fadeIn: 'fadeIn 1.5s ease-out',
+            slideUp: 'slideUp 1s ease-out',
+            bounceOnce: 'bounce 1s 1',
+            scrollBg: 'scrollBg 8s linear infinite',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: 0 },
+              '100%': { opacity: 1 }
+            },
+            slideUp: {
+              '0%': { opacity: 0, transform: 'translateY(20px)' },
+              '100%': { opacity: 1, transform: 'translateY(0)' }
+            },
+            scrollBg: {
+              '0%': { backgroundPosition: '0% 0%' },
+              '100%': { backgroundPosition: '100% 0%' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .logo-container {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+    }
+    .logo {
+      width: 120px;
+      height: auto;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-indigo-100 to-white text-gray-900 min-h-screen flex flex-col animate-fadeIn">
+
+<!-- Clock -->
+<div id="clock" class="fixed top-4 right-4 bg-black bg-opacity-80 text-white px-4 py-2 rounded font-mono text-sm z-50 shadow-lg"></div>
+<script>
+  function updateClock() {
+    const now = new Date();
+    const h = String(now.getHours()).padStart(2, '0');
+    const m = String(now.getMinutes()).padStart(2, '0');
+    const s = String(now.getSeconds()).padStart(2, '0');
+    document.getElementById('clock').textContent = `${h}:${m}:${s}`;
+  }
+  setInterval(updateClock, 1000);
+  updateClock();
+</script>
+
+<!-- Logo -->
+<div class="logo-container">
+  <img src="default_logo1.png" alt="JECRC Logo" class="logo" />
+</div>
+
+<!-- Header -->
+<header class="bg-indigo-700 text-white text-center py-6 shadow-md animate-fadeIn">
+  <h1 class="text-4xl font-bold animate-bounceOnce">JECRC Student Feedback</h1>
+  <p class="text-sm mt-1 animate-pulseSlow">✨ We value your opinion – Help us grow together!</p>
+</header>
+
+<!-- Main Form -->
+<main class="flex-grow p-6 max-w-3xl mx-auto mt-10 bg-white rounded-lg shadow-xl animate-slideUp">
+  <h2 class="text-2xl font-semibold text-indigo-600 mb-4 flex items-center gap-2">
+    <svg class="w-6 h-6 text-indigo-500 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+        d="M8 10h.01M12 10h.01M16 10h.01M21 16a2 2 0 01-2 2H5l-4 4V4a2 2 0 012-2h14a2 2 0 012 2z" />
+    </svg>
+    Share Your Feedback
+  </h2>
+  <p class="mb-6 text-gray-700">Your suggestions will help improve the JECRC Study Portal. Please take a moment to fill this out.</p>
+
+  <!-- Form -->
+  <form action="https://formspree.io/f/mpwrjvkk" method="POST" class="space-y-5" id="feedbackForm">
+    <div>
+      <label for="name" class="block font-medium text-gray-800">Name:</label>
+      <input type="text" id="name" name="name" required class="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-all duration-300 hover:shadow-md" />
+    </div>
+
+    <div>
+      <label for="email" class="block font-medium text-gray-800">Email:</label>
+      <input type="email" id="email" name="email" required class="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-all duration-300 hover:shadow-md" />
+    </div>
+
+    <div>
+      <label for="branch" class="block font-medium text-gray-800">Branch:</label>
+      <input type="text" id="branch" name="branch" required class="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-all duration-300 hover:shadow-md" />
+    </div>
+
+    <div>
+      <label for="feedback" class="block font-medium text-gray-800">Your Feedback:</label>
+      <textarea id="feedback" name="feedback" rows="5" required class="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-all duration-300 hover:shadow-md"></textarea>
+    </div>
+
+    <button type="submit" class="bg-indigo-600 text-white px-6 py-2 rounded hover:bg-indigo-700 transform hover:scale-105 transition-all duration-300 shadow">
+      Submit Feedback
+    </button>
+  </form>
+
+  <!-- Thank You Message -->
+  <div id="thankYouMessage" class="hidden mt-6 text-green-700 text-center text-lg font-semibold animate-slideUp">
+    🎉 Thank you for your valuable feedback!
+    <p class="text-gray-700 italic mt-2">
+      “The expert in anything was once a beginner.” – Helen Hayes
+    </p>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="bg-indigo-700 text-white py-4 text-center mt-auto animate-fadeIn">
+  &copy; 2025 JECRC Study Portal | Created by Aditya Mohan<br />
+  <a href="https://jecrcuniversity.edu.in/admissions" target="_blank" class="underline hover:text-yellow-300">
+    📌 Click Here for JECRC Admissions
+  </a>
+</footer>
+
+<!-- Form Handling Script -->
+<script>
+  const form = document.getElementById('feedbackForm');
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    }).then(response => {
+      if (response.ok) {
+        form.reset();
+        form.style.display = 'none';
+        const message = document.getElementById('thankYouMessage');
+        message.classList.remove('hidden');
+        message.classList.add('animate-slideUp');
+      } else {
+        alert('There was a problem submitting your feedback. Please try again.');
+      }
+    }).catch(() => {
+      alert('Network error. Please try again later.');
+    });
+  });
+</script>
+
+<!-- Fancy Marquee -->
+<div class="bg-gradient-to-r from-indigo-100 via-purple-100 to-indigo-100 py-2 mt-6 text-indigo-800 font-semibold text-center animate-scrollBg bg-[length:200%_100%] bg-[position:0_0]">
+  <marquee>🙏 THANK YOU FOR VISITING!! SEE YOU AGAIN !! 🌟</marquee>
+</div>
+</body>
+</html>
